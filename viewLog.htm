@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- This Web CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/mainWeb.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>View Log | MiniHeartDev</title>
+  </head>
+  <body>
+  
+  <script type="text/javascript">
+  
+  function addCell(tr, val) {
+    var td = document.createElement('td');
+
+    td.innerHTML = val;
+
+    tr.appendChild(td)
+  }
+
+
+  function addRow(tbl, val_1, val_2) {
+    var tr = document.createElement('tr');
+
+    addCell(tr, val_1);
+    addCell(tr, val_2);
+
+    tbl.appendChild(tr)
+  }
+
+  function clearRow(){
+
+    var table = document.getElementById("tableShowLog");
+
+    for(var i = table.rows.length - 1; i > 0; i--){
+      table.deleteRow(i);
+    }
+
+  }
+
+  function showLogForYou() {
+    var j_log_template = document.getElementById("TextareaFormat").value;
+    var j_input_log = document.getElementById("TextareaInputLog").value;
+    var table_showLog = document.getElementById("tableShowLog");
+
+    var arrayTemplateLog = [];
+    var arrayInputLog = [];
+
+    for (var i = 0;j_log_template.match(/\$\{[A-Za-z]+\}/) != null; i++) {
+      arrayTemplateLog.push(j_log_template.match(/\$\{[A-Za-z]+\}/));
+      j_log_template = j_log_template.replace(/\$\{[A-Za-z]+\}/,"$");
+    }
+
+    for (var i = 0; i < j_log_template.length; i++) {
+      if (j_log_template.charAt(i) == "$"){
+        if (j_input_log.charAt(i) != j_log_template.charAt(i+1)) {
+          arrayInputLog.push(j_input_log.match(/[\u0E00-\u0E7Fa-zA-Z0-9\@\+\:\,\"\-\.\{\}\ \/\?\=\_\(\)\&]+/));
+          j_input_log = j_input_log.replace(/[\u0E00-\u0E7Fa-zA-Z0-9\@\+\:\,\"\-\.\{\}\ \/\?\=\_\(\)\&]+/,"$");
+        } else {
+          arrayInputLog.push("");
+          j_input_log = j_input_log.substring(0, i) + "$" + j_input_log.substring(i, j_input_log.length+1);
+        }
+      } else {
+        if (j_input_log.charAt(i) != j_log_template.charAt(i)) {
+          alert("Error Format Log");
+        }
+      }
+    }
+
+    if (j_input_log != j_log_template) {
+      alert("Error Format LogIn != Format");
+    }
+
+    for (var i = 0; i < arrayTemplateLog.length; i++) {
+
+      // cell1.innerHTML = arrayTemplateLog[i];
+      // cell2.innerHTML = arrayInputLog[i];
+      addRow(table_showLog, arrayTemplateLog[i], arrayInputLog[i]);
+
+    }
+  }
+</script>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+      <a class="navbar-brand" href="/">MiniHeartDev</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/viewLog.htm">View Log
+            <span class="sr-only">(current)</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" style="margin-top:10px">
+    <div class="row">
+      <div class="col-sm-6 bg-info">
+        <h5>Log Format : </h5>
+        <div class="form-group purple-border">
+          <textarea class="form-control" id="TextareaFormat" rows="5"></textarea>
+          <label for="TextareaFormat">Example Format : <a href="/example.htm" target="_blank">this</a></label>
+        </div>
+      </div>
+      <div class="col-sm-6 bg-info">
+        <h5>Input Log : </h5>
+        <div class="form-group purple-border">
+          <textarea class="form-control" id="TextareaInputLog" rows="5"></textarea>
+          <label for="TextareaInputLog" class="pull-right"><br><button type="button" class="btn btn-warning" onclick="clearRow()">Clear Table ...</button>&emsp;<button type="button" class="btn btn-success" onclick="showLogForYou()">Show Log Me ...</button></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12 bg-light table-responsive">
+        <table class="table table-striped" id="tableShowLog">
+          <tr>
+            <th>Key</th>
+            <th>Value</th>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
