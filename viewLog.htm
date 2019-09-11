@@ -60,8 +60,8 @@
     for (var i = 0; i < j_log_template.length; i++) {
       if (j_log_template.charAt(i) == "$"){
         if (j_input_log.charAt(i) != j_log_template.charAt(i+1)) {
-          arrayInputLog.push(j_input_log.match(/[\u0E00-\u0E7Fa-zA-Z0-9\@\+\:\,\"\-\.\{\}\ \/\?\=\_\(\)\&]+/));
-          j_input_log = j_input_log.replace(/[\u0E00-\u0E7Fa-zA-Z0-9\@\+\:\,\"\-\.\{\}\ \/\?\=\_\(\)\&]+/,"$");
+          arrayInputLog.push(j_input_log.match(/[\u0E00-\u0E7Fa-zA-Z0-9\@\+\:\,\"\-\.\{\}\ \/\?\=\_\(\)\&\[\]\|]+/));
+          j_input_log = j_input_log.replace(/[\u0E00-\u0E7Fa-zA-Z0-9\@\+\:\,\"\-\.\{\}\ \/\?\=\_\(\)\&\[\]\|]+/,"$");
         } else {
           arrayInputLog.push("");
           j_input_log = j_input_log.substring(0, i) + "$" + j_input_log.substring(i, j_input_log.length+1);
