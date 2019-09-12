@@ -16,10 +16,23 @@
   
   <script type="text/javascript">
   
-  function addCell(tr, val) {
+  function addCellKey(tr, val) {
     var td = document.createElement('td');
 
     td.innerHTML = val;
+
+    td.setAttribute('style', 'word-wrap: break-word;width: 25%');
+
+    tr.appendChild(td)
+  }
+
+
+    function addCellValue(tr, val) {
+    var td = document.createElement('td');
+
+    td.innerHTML = val;
+
+    td.setAttribute('style', 'word-wrap: break-word;width: 75%');
 
     tr.appendChild(td)
   }
@@ -28,8 +41,8 @@
   function addRow(tbl, val_1, val_2) {
     var tr = document.createElement('tr');
 
-    addCell(tr, val_1);
-    addCell(tr, val_2);
+    addCellKey(tr, val_1);
+    addCellValue(tr, val_2);
 
     tbl.appendChild(tr)
   }
@@ -127,11 +140,11 @@
     </div>
 
     <div class="row">
-      <div class="col-sm-12 bg-light table-responsive">
-        <table class="table table-striped" id="tableShowLog">
+      <div class="col-sm-12 bg-light">
+        <table class="table table-striped" style="table-layout: fixed; width: 100%" id="tableShowLog">
           <tr>
-            <th>Key</th>
-            <th>Value</th>
+            <th style="width: 25%">Key</th>
+            <th style="width: 75%">Value</th>
           </tr>
         </table>
       </div>
