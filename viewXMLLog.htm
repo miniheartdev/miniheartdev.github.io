@@ -111,13 +111,12 @@
           <li class="nav-item">
             <a class="nav-link" href="/">Home</a>
           </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="/viewLog.htm">View Log
-            <span class="sr-only">(current)</span>
-            </a>
-          </li>
           <li class="nav-item">
+            <a class="nav-link" href="/viewLog.htm">View Log</a>
+          </li>
+          <li class="nav-item active">
             <a class="nav-link" href="/viewXMLLog.htm">List XML Log</a>
+            <span class="sr-only">(current)</span>
           </li>
         </ul>
       </div>
@@ -126,28 +125,20 @@
 
   <div class="container" style="margin-top:10px">
     <div class="row">
-      <div class="col-sm-6 bg-info">
-        <h5>Log Format : </h5>
-        <div class="form-group purple-border">
-          <textarea class="form-control" id="TextareaFormat" rows="5"></textarea>
-          <label for="TextareaFormat">Example Format : <a href="/example.htm" target="_blank">this</a></label>
-        </div>
-      </div>
-      <div class="col-sm-6 bg-info">
+      <div class="col-sm-12 bg-info">
         <h5>Input Log : </h5>
         <div class="form-group purple-border">
           <textarea class="form-control" id="TextareaInputLog" rows="5"></textarea>
-          <label for="TextareaInputLog" class="pull-right"><br><button type="button" class="btn btn-warning" onclick="clearRow()">Clear Table ...</button>&emsp;<button type="button" class="btn btn-success" onclick="showLogForYou()">Show Log Me ...</button></label>
+          <label for="TextareaInputLog" class="pull-right"><br><button type="button" class="btn btn-success" onclick="showLogForYou()">Show XML List</button></label>
         </div>
       </div>
     </div>
 
     <div class="row">
       <div class="col-sm-12 bg-light">
-        <table class="table table-striped" style="table-layout: fixed; width: 100%" id="tableShowLog">
+        <table class="table table-striped" style="table-layout: fixed; width: 100%" id="tableListXML">
           <tr>
-            <th style="width: 25%">Key</th>
-            <th style="width: 75%">Value</th>
+            <th style="width: 100%">List XML</th>
           </tr>
         </table>
       </div>
